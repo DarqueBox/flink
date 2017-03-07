@@ -34,7 +34,7 @@ set up by the application master. The most sophisticated component of the Mesos
 implementation is the application master. The application master currently hosts
 the following components:
 
-### Mesos Scheduler 
+### Mesos Scheduler
 
 The scheduler is responsible for registering the framework with Mesos,
 requesting resources, and launching worker nodes. The scheduler continuously
@@ -57,7 +57,7 @@ The artifact server is responsible for providing resources to the worker
 nodes. The resources can be anything from the Flink binaries to shared secrets
 or configuration files. For instance, in non-containered environments, the
 artifact server will provide the Flink binaries. What files will be served
-depends on the configuration overlay used. 
+depends on the configuration overlay used.
 
 ### Flink's JobManager and Web Interface
 
@@ -87,7 +87,7 @@ If you don't have a running DC/OS cluster, please follow the
 [instructions on how to install DC/OS on the official website](https://dcos.io/install/).
 
 Once you have a DC/OS cluster, you may install Flink through the DC/OS
-Universe. In the search prompt, just search for Flink. 
+Universe. In the search prompt, just search for Flink.
 
 **Note**: At the time of this writing, Flink was not yet available in the
 Unvierse. Please use the following workaround in the meantime:
@@ -95,24 +95,24 @@ Unvierse. Please use the following workaround in the meantime:
 1. Add the Development Universe
 
     `dcos marathon app add https://raw.githubusercontent.com/mesosphere/dcos-flink-service/Makman2/quickstart/universe-server.json`
-    
+
 2. Add the local Universe repository:
 
    `dcos package repo add --index=0 dev-universe http://universe.marathon.mesos:8085/repo`
 
 3. Install Flink through the Universe page or using the `dcos` command:
-   
+
    `dcos package install flink`
 
 
 ## Mesos without DC/OS
 
-Let's take a look at how to setup Flink on Mesos without DC/OS. 
+Let's take a look at how to setup Flink on Mesos without DC/OS.
 
 ### Prerequisites
 
 Please follow the
-[instructions on how to setup Mesos on the official website](http://mesos.apache.org/documentation/latest/). 
+[instructions on how to setup Mesos on the official website](http://mesos.apache.org/documentation/latest/).
 
 ### Optional dependencies
 
@@ -134,7 +134,7 @@ the Flink binaries and configuration.
 This is controlled via the following configuration entries:
 
     mesos.resourcemanager.tasks.container.type: mesos _or_ docker
-    
+
 If set to 'docker', specify the image name:
 
     mesos.resourcemanager.tasks.container.image.name: image_name
@@ -148,7 +148,7 @@ which manage the Flink processes in a Mesos cluster:
 1. mesos-appmaster.sh
    This starts the Mesos application master which will register the Mesos
    scheduler. It is also responsible for starting up the worker nodes.
-   
+
 2. mesos-taskmanager.sh
    The entry point for the Mesos worker processes. You don't need to explicitly
    execute this script. It is automatically launched by the Mesos worker node to
@@ -169,12 +169,12 @@ For the reconciliation of tasks to work correctly, please also set
 
 Marathon needs to be set up to launch the `bin/mesos-appmaster.sh` script. In
 particular, it should also adjust any configuration parameters for the Flink
-cluster. 
+cluster.
 
 Here is an example configuration for Marathon:
 
     {
-    "id": "basic-0", 
+    "id": "basic-0",
     "cmd": "$FLINK_HOME/bin/mesos-appmaster.sh -DconfigEntry=configValue -DanotherEntry=anotherValue ...",
     "cpus": 1.0,
     "mem": 2048,
@@ -191,12 +191,12 @@ Here is an example configuration for Marathon:
 `mesos.maximum-failed-tasks`: The maximum number of failed workers before
     the cluster fails (**DEFAULT**: Number of initial workers) May be set to -1
     to disable this feature.
-    
+
 `mesos.master`: The Mesos master URL. The value should be in one of the
 	 following forms: host:port, zk://host1:port1,host2:port2,.../path,
 	 zk://username:password@host1:port1,host2:port2,.../path,
 	 file:///path/to/file (where file contains one of the above)
-     
+
 `mesos.failover-timeout`: The failover timeout in seconds for the Mesos scheduler, after
 	 which running tasks are automatically shut down (**DEFAULT:** 600).
 
@@ -225,6 +225,8 @@ to be set to `true` encryption to enable encryption.
 `mesos.resourcemanager.tasks.container.type`: Type of the containerization used: "mesos" or "docker" (DEFAULT: mesos);
 
 `mesos.resourcemanager.tasks.container.image.name`: Image name to use for the container (**NO DEFAULT**)
+
+`mesos.resourcemanager.tasks.container.image.volumes`: A comma seperated list of [host_path:]container_path[:RO|RW]. This allows for mounting additional volumes into your container. (**NO DEFAULT**)
 
 
 #### General configuration

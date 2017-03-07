@@ -189,7 +189,7 @@ will be used under the directory specified by jobmanager.web.tmpdir.
 
 - `blob.service.ssl.enabled`: Flag to enable ssl for the blob client/server communication. This is applicable only when the global ssl flag security.ssl.enabled is set to true (DEFAULT: true).
 
-- `restart-strategy`: Default [restart strategy]({{site.baseurl}}/dev/restart_strategies.html) to use in case no 
+- `restart-strategy`: Default [restart strategy]({{site.baseurl}}/dev/restart_strategies.html) to use in case no
 restart strategy has been specified for the job.
 The options are:
     - fixed delay strategy: `fixed-delay`.
@@ -202,7 +202,7 @@ The options are:
 Default value is 1, unless "fixed-delay" was activated by enabling checkpoints, in which case the default is `Integer.MAX_VALUE`.
 
 - `restart-strategy.fixed-delay.delay`: Delay between restart attempts, used if the default restart strategy is set to "fixed-delay".
-Default value is the `akka.ask.timeout`, unless "fixed-delay" was activated by enabling checkpoints, in which case 
+Default value is the `akka.ask.timeout`, unless "fixed-delay" was activated by enabling checkpoints, in which case
 the default is 10s.
 
 - `restart-strategy.failure-rate.max-failures-per-interval`: Maximum number of restarts in given time interval before failing a job in "failure-rate" strategy.
