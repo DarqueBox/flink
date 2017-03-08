@@ -1,0 +1,4 @@
+**/target/*
+*.iml
+flink-runtime/src/main/resources/.version.properties
+flink-connectors/flink-avro/src/test/java/org/apache/flink/api/io/avro/generated/
