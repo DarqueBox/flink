@@ -67,19 +67,18 @@ under the License.
 						</goals>
 						<configuration>
 							<artifactSet>
-								<includes>
-									<include>com.squareup.okhttp3:*</include>
-									<include>com.squareup.okio:*</include>
+								<includes combine.children="append">
+									<include>com.squareup.okhttp3:okhttp</include>
+									<include>com.squareup.okio:okio</include>
 								</includes>
 							</artifactSet>
-							<promoteTransitiveDependencies>true</promoteTransitiveDependencies>
 							<relocations combine.children="append">
 								<relocation>
-									<pattern>okhttp3</pattern>
+									<pattern>com.squareup.okhttp3</pattern>
 									<shadedPattern>org.apache.flink.shaded.okhttp3</shadedPattern>
 								</relocation>
 								<relocation>
-									<pattern>okio</pattern>
+									<pattern>com.squareup.okio</pattern>
 									<shadedPattern>org.apache.flink.shaded.okio</shadedPattern>
 								</relocation>
 							</relocations>
