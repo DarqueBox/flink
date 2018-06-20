@@ -214,8 +214,9 @@ public class KinesisConfigUtil {
 		validateAwsConfiguration(config);
 
 		KinesisProducerConfiguration kpc = KinesisProducerConfiguration.fromProperties(config);
-		kpc.setRegion(config.getProperty(AWSConfigConstants.AWS_REGION));
-
+		if (config.containsKey(AWSConfigConstants.AWS_REGION)) {
+			kpc.setRegion(config.getProperty(AWSConfigConstants.AWS_REGION));
+		}
 		kpc.setCredentialsProvider(AWSUtil.getCredentialsProvider(config));
 
 		// we explicitly lower the credential refresh delay (default is 5 seconds)
