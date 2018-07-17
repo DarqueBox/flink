@@ -20,6 +20,9 @@ package org.apache.flink.streaming.connectors.kinesis.util;
 
 import org.apache.flink.annotation.Internal;
 
+/**
+ * A small utility class for implementing backpressure.
+ */
 @Internal
 public class TimeoutLatch {
 
