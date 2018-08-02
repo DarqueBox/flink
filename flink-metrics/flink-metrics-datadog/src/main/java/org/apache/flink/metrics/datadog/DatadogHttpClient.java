@@ -70,14 +70,21 @@ public class DatadogHttpClient {
 
 	private void validateApiKey() {
 		Request r = new Request.Builder().url(validateUrl).get().build();
+		Response res = null;
 
-		try (Response response = client.newCall(r).execute()) {
-			if (!response.isSuccessful()) {
+		try {
+			res = client.newCall(r).execute();
+			if (!res.isSuccessful()) {
 				throw new IllegalArgumentException(
 					String.format("API key: %s is invalid", apiKey));
 			}
 		} catch (IOException e) {
 			throw new IllegalStateException("Failed contacting Datadog to validate API key", e);
+		} finally {
+			if (res != null && res.body() != null) {
+				res.body().close();
+			}
+
 		}
 	}
 
@@ -115,7 +122,10 @@ public class DatadogHttpClient {
 
 		@Override
 		public void onResponse(Call call, Response response) throws IOException {
-			// Do nothing
+			// ensure we just close the body
+			if (response != null && response.body() != null) {
+				response.body().close();
+			}
 		}
 	}
 }
