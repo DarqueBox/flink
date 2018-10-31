@@ -620,9 +620,21 @@ public class Configuration implements Iterable<Entry<String,String>>,
     }
   }
 
-  static {
+  static{
+    //print deprecation warning if hadoop-site.xml is found in classpath
+    ClassLoader cL = Thread.currentThread().getContextClassLoader();
+    if (cL == null) {
+      cL = Configuration.class.getClassLoader();
+    }
+    if(cL.getResource("hadoop-site.xml")!=null) {
+      LOG.warn("DEPRECATED: hadoop-site.xml found in the classpath. " +
+          "Usage of hadoop-site.xml is deprecated. Instead use core-site.xml, "
+          + "mapred-site.xml and hdfs-site.xml to override properties of " +
+          "core-default-shaded.xml, mapred-default.xml and hdfs-default.xml " +
+          "respectively");
+    }
     addDefaultResource("core-default-shaded.xml");
-    addDefaultResource("core-default-testing.xml");
+    addDefaultResource("core-site.xml");
   }
 
   private Properties properties;
