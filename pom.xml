@@ -24,6 +24,20 @@ under the License.
 		<version>18</version>
 	</parent>
 
+  <distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>instructure-releases</name>
+        <url>https://instructure.jfrog.io/instructure/oss-maven</url>
+    </repository>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>instructure-snapshots</name>
+        <url>https://instructure.jfrog.io/instructure/oss-maven</url>
+    </snapshotRepository>
+	</distributionManagement>
+
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.apache.flink</groupId>
@@ -299,7 +313,7 @@ under the License.
 				<version>1.1.4</version>
 			</dependency>
 
-			<!-- Make sure we use a consistent avro version between Flink and Hadoop -->		
+			<!-- Make sure we use a consistent avro version between Flink and Hadoop -->
  			<dependency>
 				<groupId>org.apache.avro</groupId>
 				<artifactId>avro</artifactId>
@@ -1401,7 +1415,7 @@ under the License.
 						<failOnViolation>true</failOnViolation>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
@@ -1429,7 +1443,7 @@ under the License.
 				<plugin>
 					<groupId>pl.project13.maven</groupId>
 					<artifactId>git-commit-id-plugin</artifactId>
-					<!-- Don't use 2.1.14 as it is incompatible with various maven versions --> 
+					<!-- Don't use 2.1.14 as it is incompatible with various maven versions -->
 					<version>2.1.10</version>
 					<configuration>
 						<excludeProperties>
