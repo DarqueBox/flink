@@ -26,7 +26,7 @@ under the License.
 	<parent>
 		<groupId>org.apache.flink</groupId>
 		<artifactId>flink-shaded-hadoop</artifactId>
-		<version>1.7-SNAPSHOT</version>
+		<version>1.7.0</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -48,16 +48,16 @@ under the License.
 		</dependency>
 	</dependencies>
 
-	
+
 
 	<build>
 		<plugins>
 
-			<!-- 
+			<!--
 				Don't deploy this uber-jar. It is not referenced by any other artifact.
 				Its sole purpose is to be included in the 'flink-dist' build.
 			-->
- 
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
@@ -66,7 +66,7 @@ under the License.
 				</configuration>
 			</plugin>
 
-			<!-- 
+			<!--
 				Build an uber jar of the shaded-hadoop-dependency
 				and all its transitive dependencies
 			-->

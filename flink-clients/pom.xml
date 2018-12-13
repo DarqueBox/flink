@@ -26,7 +26,7 @@ under the License.
 	<parent>
 		<groupId>org.apache.flink</groupId>
 		<artifactId>flink-parent</artifactId>
-		<version>1.7-SNAPSHOT</version>
+		<version>1.7.0</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -82,7 +82,7 @@ under the License.
 			<scope>test</scope>
 			<type>test-jar</type>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
 			<artifactId>akka-testkit_${scala.binary.version}</artifactId>
@@ -160,7 +160,7 @@ under the License.
 				</executions>
 			</plugin>
 		</plugins>
-		
+
 		<pluginManagement>
 			<plugins>
 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
