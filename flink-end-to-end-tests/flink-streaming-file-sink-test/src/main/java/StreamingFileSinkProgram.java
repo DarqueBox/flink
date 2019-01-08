@@ -28,7 +28,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.filesystem.BucketAssigner;
 import org.apache.flink.streaming.api.functions.sink.filesystem.StreamingFileSink;
 import org.apache.flink.streaming.api.functions.sink.filesystem.bucketassigners.SimpleVersionedStringSerializer;
-import org.apache.flink.streaming.api.functions.sink.filesystem.rollingpolicies.OnCheckpointRollingPolicy;
+import org.apache.flink.streaming.api.functions.sink.filesystem.rollingpolicies.DefaultRollingPolicy;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 
 import java.io.PrintStream;
@@ -66,11 +66,11 @@ public enum StreamingFileSinkProgram {
 				out.println(element.f1);
 			})
 			.withBucketAssigner(new KeyBucketAssigner())
-			.withRollingPolicy(OnCheckpointRollingPolicy.build())
+			.withRollingPolicy(DefaultRollingPolicy.create().withInactivityInterval(120L).build())
 			.build();
 
 		// generate data, shuffle, sink
-		env.addSource(new Generator(10, 10, 60))
+		env.addSource(new Generator(100, 1, 600))
 			.keyBy(0)
 			.addSink(sink);
 
